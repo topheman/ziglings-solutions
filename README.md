@@ -1,3 +1,22 @@
+# My ziglings solutions
+
+[Original exercises](https://codeberg.org/ziglings/exercises)
+
+Here is how I setup zig (on MacOS with VSCode):
+
+- `brew install zig` (got the v0.13.0, using stable, not dev)
+  - or `brew upgrade zig` (if you had an older version of zig)
+- `which zig` -> `/usr/local/bin/zig`
+- Open VSCode
+  - Open VSCode user settings and add: `"zig.path": "/usr/local/bin/zig"` at the end (will be used by the extension)
+  - Install https://marketplace.visualstudio.com/items?itemName=ziglang.vscode-zig
+  - Click OK to install `zls` (the zig language server)
+
+For ziglings, you'll need to:
+
+- clone the project from https://codeberg.org/ziglings/exercises
+- checkout the `v0.12.0` tag
+
 # Ziglings
 
 Welcome to Ziglings! This project contains a series of tiny
@@ -69,7 +88,7 @@ reading these.
 ## A Note About Versions
 
 **Hint:** To check out Ziglings for a stable release of Zig, you can use
-the appropriate tag. 
+the appropriate tag.
 
 The Zig language is under very active development. In order to be
 current, Ziglings tracks **development** builds of the Zig
