@@ -35,7 +35,7 @@ pub fn main() !void {
         // by doing nothing
         //
         // we want to catch error.PathAlreadyExists and do nothing
-        ??? => {},
+        error.PathAlreadyExists => {},
         // if is any other unexpected error we just propagate it through
         else => return e,
     };
@@ -44,7 +44,9 @@ pub fn main() !void {
     // wait a minute
     // opening a directory might fail!
     // what should we do here?
-    var output_dir: std.fs.Dir = cwd.openDir("output", .{});
+    var output_dir: std.fs.Dir = cwd.openDir("output", .{}) catch |e| switch (e) {
+        else => return e,
+    };
     defer output_dir.close();
 
     // we try to open the file `zigling.txt`,
@@ -53,9 +55,9 @@ pub fn main() !void {
     // it is a good habit to close a file after you are done with it
     // so that other programs can read it and prevent data corruption
     // but here we are not yet done writing to the file
-    // if only there were a keyword in zig that
-    // allows you "defer" code execute to the end of scope...
-    file.close();
+    // if only there are a keyword in zig that
+    // allow you "defer" code execute to the end of scope...
+    defer file.close();
 
     // !you are not allowed to switch these two lines above the file closing line!
     const byte_written = try file.write("It's zigling time!");
